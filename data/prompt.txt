@@ -1,0 +1,10 @@
+give me the output summary in 1 sentence
+
+Retrun only valid JSON.
+do not include any explanation or text outside of the JSON format.
+the JSON should have the following structure:
+{{
+    "summary": "",
+    "Risk": "",
+    "Recommendations": ""
+}}
