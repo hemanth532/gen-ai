@@ -38,6 +38,8 @@ pip install -r requirements.txt
 ## Run the chat app
 
 ```bash
+streamlit run multiRAG_UI.py
+
 streamlit run chat_app.py
 ```
 

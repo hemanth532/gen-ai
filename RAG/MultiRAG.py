@@ -1,6 +1,6 @@
 ## Start Local LLM
-## PDF Reader
-## PDF chunking
+## multi doc  Reader
+## multi doc chunking
 ## Embeddings
 ## Vector DB
 ## LLM for processing the extracted text
