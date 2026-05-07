@@ -14,16 +14,18 @@ from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.messages import HumanMessage, AIMessage
 
-DATA_PATH = "data"
 PERSIST_DIR = "multirag_db"
-CHUNK_SIZE = 200
-CHUNK_OVERLAP = 20
+DEFAULT_CHUNK_SIZE = 2000
+DEFAULT_CHUNK_OVERLAP = 200
 LLM_MODEL = "llama3.2:1b"
 LLM_BASE_URL = "http://localhost:11434"
 DEFAULT_TOP_K = 3
 PROMPT_TEMPLATE = (
-    "You are a helpful assistant that provides information about RAG. "
-    "You must give the information only from the uploaded document and do not provide any information outside of the document.\n\n"
+    "You are a helpful assistant that provides information about uploaded documents. "
+    "Use ONLY the information in the provided Context. "
+    "Do not answer from general knowledge, and do not hallucinate. "
+    "If the answer cannot be found in the Context, respond exactly with: "
+    "'No relevant information was found in the uploaded documents.'\n\n"
     "{history}\n\n"
     "Context:\n{context}\n\n"
     "Human:\n{input}"
@@ -31,10 +33,12 @@ PROMPT_TEMPLATE = (
 
 llm = ChatOllama(model=LLM_MODEL, base_url=LLM_BASE_URL, temperature=0.1)
 
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=CHUNK_SIZE,
-    chunk_overlap=CHUNK_OVERLAP,
-)
+def get_text_splitter(chunk_size, chunk_overlap):
+    return RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+    )
+
 embeddings = OllamaEmbeddings(model=LLM_MODEL)
 
 
@@ -105,6 +109,13 @@ def build_prompt(history, context, user_input):
     return PROMPT_TEMPLATE.format(history=history, context=context, input=user_input)
 
 
+def summarize_documents(documents, max_chars=500):
+    if not documents:
+        return ""
+    sample_text = "\n\n".join(doc.page_content for doc in documents[:2])
+    return sample_text[:max_chars] + ("..." if len(sample_text) > max_chars else "")
+
+
 def create_retriever(store, top_k=DEFAULT_TOP_K):
     return store.as_retriever(search_kwargs={"k": top_k}) if store else None
 
@@ -118,6 +129,10 @@ def init_streamlit_state(retriever, vectorstore):
         st.session_state.chat_history = []
     if "top_k" not in st.session_state:
         st.session_state.top_k = DEFAULT_TOP_K
+    if "chunk_size" not in st.session_state:
+        st.session_state.chunk_size = DEFAULT_CHUNK_SIZE
+    if "chunk_overlap" not in st.session_state:
+        st.session_state.chunk_overlap = DEFAULT_CHUNK_OVERLAP
     if "status_message" not in st.session_state:
         st.session_state.status_message = "Ready"
 
@@ -175,6 +190,22 @@ def run_streamlit_app(retriever, vectorstore):
             value=st.session_state.top_k,
             help="Number of retrieved chunks to use as context for the LLM.",
         )
+        st.session_state.chunk_size = st.slider(
+            "Chunk size",
+            min_value=500,
+            max_value=5000,
+            value=st.session_state.chunk_size,
+            step=100,
+            help="How many characters each document chunk should contain.",
+        )
+        st.session_state.chunk_overlap = st.slider(
+            "Chunk overlap",
+            min_value=50,
+            max_value=500,
+            value=st.session_state.chunk_overlap,
+            step=10,
+            help="How many characters consecutive chunks should overlap.",
+        )
         st.markdown("---")
         st.markdown("### Status")
         st.info(st.session_state.status_message)
@@ -214,10 +245,26 @@ def run_streamlit_app(retriever, vectorstore):
                     st.warning(f"Unsupported file format: {uploaded_file.name}")
                     continue
 
-                new_documents.extend(loader.load())
+                loaded_docs = loader.load()
+                if not loaded_docs:
+                    st.warning(f"No text was extracted from {uploaded_file.name}.")
+                else:
+                    st.write(f"Loaded {len(loaded_docs)} document chunk(s) from {uploaded_file.name}.")
+                    st.code(summarize_documents(loaded_docs), language="text")
+                new_documents.extend(loaded_docs)
 
             if new_documents:
+                st.write(
+                    f"Using chunk_size={st.session_state.chunk_size} and chunk_overlap={st.session_state.chunk_overlap}."
+                )
+                text_splitter = get_text_splitter(
+                    st.session_state.chunk_size,
+                    st.session_state.chunk_overlap,
+                )
                 new_chunks = text_splitter.split_documents(new_documents)
+                st.write(f"Split uploaded documents into {len(new_chunks)} embeddings-ready chunks.")
+                if new_chunks:
+                    st.code(new_chunks[0].page_content[:500], language="text")
                 if st.session_state.vectorstore is None:
                     st.session_state.vectorstore = Chroma.from_documents(
                         documents=new_chunks,
@@ -258,15 +305,23 @@ def run_streamlit_app(retriever, vectorstore):
 
     if ask_button and user_query:
         retrieved_docs = st.session_state.retriever.invoke(user_query)
+        st.write(f"Retrieved {len(retrieved_docs)} document chunk(s) for this query.")
         context = "\n".join(doc.page_content for doc in retrieved_docs)
 
-        with st.expander("Retrieved context", expanded=False):
-            for index, doc in enumerate(retrieved_docs, start=1):
-                st.write(f"**Chunk {index}:**")
-                st.write(doc.page_content)
+        if not context.strip():
+            st.warning(
+                "No relevant document content was found for this question. "
+                "Please upload a document containing the answer, or ask a different question."
+            )
+            response = AIMessage(content="No relevant information was found in the uploaded documents.")
+        else:
+            with st.expander("Retrieved context", expanded=False):
+                for index, doc in enumerate(retrieved_docs, start=1):
+                    st.write(f"**Chunk {index}:**")
+                    st.write(doc.page_content)
 
-        history_text = format_history(st.session_state.chat_history)
-        response = llm.invoke(build_prompt(history_text, context, user_query))
+            history_text = format_history(st.session_state.chat_history)
+            response = llm.invoke(build_prompt(history_text, context, user_query))
 
         st.session_state.chat_history.append(HumanMessage(content=user_query))
         st.session_state.chat_history.append(response)
@@ -277,18 +332,9 @@ def run_streamlit_app(retriever, vectorstore):
     render_chat_history()
 
 
-# Load documents and build the vector index.
-documents = load_documents_from_path(DATA_PATH)
-vectorstore = None
-retriever = None
-if documents:
-    chunks = text_splitter.split_documents(documents)
-    vectorstore = build_vectorstore(chunks)
-else:
-    vectorstore = build_vectorstore([])
-
-if vectorstore is not None:
-    retriever = create_retriever(vectorstore)
+# Start with no preloaded documents; the index is built from Streamlit uploads.
+vectorstore = build_vectorstore([])
+retriever = create_retriever(vectorstore) if vectorstore is not None else None
 
 if __name__ == "__main__":
     if st.runtime.exists():
