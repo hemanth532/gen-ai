@@ -12,4 +12,4 @@ class Retriever:
 
     def retrieve(self, query: str) -> List[Document]:
         """Return the top-k relevant document chunks for the query."""
-        return self.retriever.get_relevant_documents(query)
+        return self.retriever.invoke(query)

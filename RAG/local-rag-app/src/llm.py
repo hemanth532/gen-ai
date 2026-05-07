@@ -26,16 +26,22 @@ class OllamaLLM:
             "model": self.model,
             "prompt": prompt,
             "temperature": self.temperature,
-            "max_tokens": self.max_tokens,
+            "num_predict": self.max_tokens,
         }
 
-        response = requests.post(
-            f"{self.base_url}/v1/generate",
-            headers={"Content-Type": "application/json"},
-            data=json.dumps(payload),
-            timeout=60,
-        )
-        response.raise_for_status()
+        try:
+            response = requests.post(
+                f"{self.base_url}/api/generate",
+                headers={"Content-Type": "application/json"},
+                data=json.dumps(payload),
+                timeout=60,
+            )
+            response.raise_for_status()
+        except requests.exceptions.ConnectionError as e:
+            raise RuntimeError(f"Failed to connect to Ollama at {self.base_url}. Is Ollama running?") from e
+        except requests.exceptions.HTTPError as e:
+            raise RuntimeError(f"Ollama API error: {response.status_code} {response.text}") from e
+        
         result = response.json()
 
         if isinstance(result, dict):
