@@ -6,7 +6,7 @@
 ## Embeddings
 ## Vector DB
 ## LLM for processing the extracted text
-## Convesation Loop
+## Conversation Loop
 
 from langchain_ollama import ChatOllama
 from langchain_community.document_loaders import PyPDFLoader
