@@ -12,3 +12,6 @@ unstructured[md]>=0.12.0 #Unstructured Markdown
 chromadb>=0.4.0 #Vector database (Chroma DB)
 faiss-cpu>=1.7.0 #Vector database (FAISS)
 rank_bm25>=0.2.1 #BM25 ranking algorithm for document retrieval
+openai-whisper>=1.1.0 #openai's whisper for speech recognition
+pytesseract>=0.3.10 #OCR for image-based documents
+#Pillow>=9.0.0 #Image processing for OCR
