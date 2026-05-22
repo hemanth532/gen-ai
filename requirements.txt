@@ -14,4 +14,6 @@ faiss-cpu>=1.7.0 #Vector database (FAISS)
 rank_bm25>=0.2.1 #BM25 ranking algorithm for document retrieval
 openai-whisper>=1.1.0 #openai's whisper for speech recognition
 pytesseract>=0.3.10 #OCR for image-based documents
+faster_whisper>=1.0.0 #faster whisper for speech recognition
+easyocr>=1.0.0 #EasyOCR for OCR Tasks
 #Pillow>=9.0.0 #Image processing for OCR
