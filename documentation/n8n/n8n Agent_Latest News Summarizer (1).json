@@ -1,0 +1,152 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "e124e613-1203-4bf0-b53f-b68177e6f9a3",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "53c136fe-3e77-4709-a143-fe82746dd8b6",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {},
+      "id": "08eb7620-d550-48c9-b65d-9ebfebf6de7d",
+      "name": "Simple Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "position": [
+        352,
+        224
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "17314836-ff27-436c-9441-0db0f9e5c588",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        192,
+        224
+      ],
+      "typeVersion": 1.2,
+      "credentials": {
+        "openAiApi": {
+          "id": "o2xxTct3wNsYTts6",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "6f02f1b5-b68f-4e2b-9f8f-5c7732ee2f8a",
+      "name": "SerpAPI",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "position": [
+        496,
+        224
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "serpApi": {
+          "id": "z82HYMGcynxCJmpg",
+          "name": "SerpAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a helpful AI.\n\nSearch for the latest news, government notifications, and expert analyses on the recently declared US tariff structure on India. Summarize the findings with a focus on investment implications.\n\nInstructions:\nExtract the industry domain from the user query.\n# Identify impacted sectors – List which sectors are directly affected by the new tariffs. Explain how tariffs will impact each sector (exports, imports, pricing, demand, supply chain).\n# Highlight indirect impacts – Note sectors that could be indirectly affected due to supply chain disruptions, input cost changes, or market sentiment.\n# Investor perspective – Clearly outline:\nSectors to avoid in the short-term (due to volatility, trade barriers, or reduced competitiveness).\n# Sectors likely to remain resilient or benefit despite tariffs (e.g., those with strong domestic demand, alternative export markets, or government support).\n# Provide context – If available, include expert commentary, trade data, or policy notes to support the analysis.\n\nOutput:\nDeliver output in a structured format –\n# Directly Impacted Sectors\n# Indirectly Impacted Sectors\n# Sectors to Avoid (Short-Term)\n# Resilient / Beneficiary Sectors\n\nMake sure that the news extracted is strictly aligned with the \"US tariffs on India\" domain.\n\nGenerate the output in form of a structured table."
+        }
+      },
+      "id": "c483aeb6-7974-45a7-8a2c-36f51d1efc38",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        280,
+        0
+      ],
+      "typeVersion": 1.8
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "caec78ff-f469-4aa0-b970-0d8a0ea8a3e1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bccba59617320050de9f301d83dc86b5ed3eedf0626428bc6e1d48105479e635"
+  },
+  "id": "IuvmG4KrwX9yz5XM",
+  "tags": []
+}
