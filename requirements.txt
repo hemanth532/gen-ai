@@ -17,3 +17,4 @@ pytesseract>=0.3.10 #OCR for image-based documents
 faster_whisper>=1.0.0 #faster whisper for speech recognition
 easyocr>=1.0.0 #EasyOCR for OCR Tasks
 #Pillow>=9.0.0 #Image processing for OCR
+fastapi>=0.95.0 #FastAPI for API development
