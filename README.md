@@ -71,6 +71,30 @@ docker --version
 docker compose version
 ```
 
+### n8n (Optional)
+
+```bash
+n8n --version
+```
+
+Install n8n locally:
+
+```bash
+npm install -g n8n
+```
+
+Start n8n locally:
+
+```bash
+n8n start
+```
+
+Open the local editor at:
+
+```text
+http://localhost:5678
+```
+
 ### Ollama (Optional)
 
 ```bash
