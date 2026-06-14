@@ -118,32 +118,77 @@ pip install -r requirements.txt
 # Project Structure
 
 ```text
-gen-ai-projects/
+gen-ai/
 │
-├── apps/
-│   ├── simple-rag/
-│   ├── agentic-rag/
-│   ├── graph-rag/
-│   ├── crag/
-│   ├── multi-agent/
-│   └── voice-assistant/
+├── Agentic Frameworks/
+│   ├── autogen_demo.py
+│   ├── crewai_demo.py
+│   ├── googleADK_demo.py
+│   └── Lang Framworks/
+│       ├── langchain_demo.py
+│       ├── langfuse_demo.py
+│       ├── langgraph_demo.py
+│       └── langsmith_demo.py
 │
-├── backend/
-│   ├── api/
-│   ├── services/
-│   ├── agents/
-│   └── workflows/
+├── audioToText/
+│   ├── audioToTextDemo.py
+│   └── audioToTextDemo2.py
 │
-├── frontend/
-│   └── react-ui/
+├── data/
+│   ├── input.txt
+│   ├── input2.txt
+│   └── prompt.txt
 │
-├── vector-db/
+├── documentation/
+│   ├── Gen_AI_and_Agentic_AI_summary.txt
+│   ├── GPT_Links.txt
+│   └── n8n/
+│       └── n8n Agent_Latest News Summarizer (1).json
 │
-├── documents/
+├── enterpriseStandard/
+│   ├── main.py
+│   └── requirements.txt
 │
-├── tests/
+├── imageToText/
+│   ├── imageText.py
+│   └── imageText2.py
 │
-└── requirements.txt
+├── LLM/
+│   ├── llmgemini.py
+│   ├── llmollama.py
+│   └── llmopenai.py
+│
+├── multiModel/
+│   ├── multiModel.py
+│   └── multiModelRefactor.py
+│
+├── n8n/
+│
+├── RAG/
+│   ├── doc_RAG.py
+│   ├── md_RAG.py
+│   ├── multiRAG_UI.py
+│   ├── multiRAG.py
+│   ├── pdf_RAG.py
+│   ├── search_demo.py
+│   ├── txt_RAG.py
+│   ├── data/
+│   │   ├── company_policy.txt
+│   │   ├── rag_intro.md
+│   │   └── rag_intro.txt
+│   └── local-rag-app/
+│       ├── app.py
+│       ├── README.md
+│       ├── requirements.txt
+│       ├── chroma_db/
+│       ├── multirag_db/
+│       └── src/
+│
+├── chat_app.py
+├── read_write_file.py
+├── sample.py
+├── requirements.txt
+└── README.md
 ```
 
 ---
@@ -432,41 +477,48 @@ load_dotenv()
 
 # Technology Stack
 
-Frontend
+Core Platform
 
-* React
-* Vite
-* Tailwind CSS
-
-Backend
-
-* Python
+* Python 3.11+
+* Streamlit
 * FastAPI
+* Ollama
 
-AI Frameworks
+AI & Agent Frameworks
 
 * LangChain
-* LangGraph
+* Autogen
 * CrewAI
+* LangGraph
+* OpenAI SDK
+* Google Generative AI
 
 LLMs
 
-* OpenAI
-* Claude
-* Gemini
-* Ollama
+* Ollama models
+* OpenAI GPT models
+* Google Gemini
 
-Vector Databases
+RAG & Vector Search
 
 * ChromaDB
-* Pinecone
 * FAISS
+* BM25
+* LangChain document loaders and retrievers
 
-Deployment
+OCR & Speech
 
-* Vercel
-* Render
-* Docker
+* OpenAI Whisper
+* faster-whisper
+* pytesseract
+* EasyOCR
+
+Utilities
+
+* python-docx
+* unstructured
+* Pillow
+* dotenv
 
 ---
 
