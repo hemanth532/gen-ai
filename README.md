@@ -1,58 +1,542 @@
-# gen-ai project
+# 🚀 Gen AI & Agentic AI Projects Repository
 
-This repository contains a small Python AI project with a Streamlit chat interface, LLM integration, and retrieval-augmented generation (RAG) examples.
+A collection of Generative AI, RAG, Agentic AI, Multi-Agent, MCP, and Workflow Automation projects built using Python, LangChain, LangGraph, CrewAI, Ollama, OpenAI, and Vector Databases.
 
-## Overview
+---
 
-- `chat_app.py`: Streamlit-based chat UI using the Ollama API and the Qwen model.
-- `LLM/`: Local LLM integration examples.
-  - `llmgemini.py`: Google Gemini GenAI example.
-  - `llmollama.py`: Ollama-related code (not shown).
-  - `llmopenai.py`: OpenAI integration example (not shown).
-- `RAG/`: Retrieval-augmented generation examples.
-  - `doc_RAG.py`: Document loader, chunking, embeddings, and conversational RAG flow using LangChain and Chroma.
-  - `md_RAG.py`, `MultiRAG.py`, `pdf_RAG.py`, `txt_RAG.py`: Additional RAG scripts.
-- `data/`: Sample input and prompt files for experiments.
-- `requirements.txt`: Python dependencies needed to run the project.
+# 📚 Table of Contents
 
-## Requirements
+* Overview
+* Prerequisites
+* Installation
+* Project Structure
+* Core Concepts
 
-Install dependencies with:
+  * LLM
+  * Prompt Engineering
+  * RAG
+  * MCP
+  * Agentic AI
+  * Multi-Agent Systems
+  * Vector Databases
+  * Workflow Orchestration
+* Running Projects
+* Environment Variables
+* Technology Stack
+* Troubleshooting
+
+---
+
+# Overview
+
+This repository contains implementations of:
+
+* Simple RAG
+* Agentic RAG
+* Graph RAG
+* Corrective RAG (CRAG)
+* AI Agents
+* Multi-Agent Systems
+* Enterprise Workflows
+* OCR Applications
+* Voice AI Assistants
+* Document Processing Pipelines
+
+---
+
+# Prerequisites
+
+## Software
+
+Install the following:
+
+### Python
+
+```bash
+python --version
+```
+
+Recommended: Python 3.11+
+
+### Git
+
+```bash
+git --version
+```
+
+### Docker (Optional)
+
+```bash
+docker --version
+docker compose version
+```
+
+### Ollama (Optional)
+
+```bash
+ollama --version
+```
+
+Download:
+https://ollama.com
+
+---
+
+# Installation
+
+## Clone Repository
+
+```bash
+git clone <repository-url>
+cd gen-ai-projects
+```
+
+## Create Virtual Environment
+
+Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+Linux/Mac
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-1. Create a virtual environment (if not already)
-   python -m venv venv
-2. Activate the environment
-   venv\Scripts\activate
-3. Install dependencies in the activated environment
-   pip install -r requirements.txt
-4. Run the chat app
-   streamlit run chat_app.py
-5. When finished, deactivate
-   deactivate
+---
 
+# Project Structure
 
-## Run the chat app
-
-```bash
-streamlit run multiRAG_UI.py
-
-streamlit run chat_app.py
+```text
+gen-ai-projects/
+│
+├── apps/
+│   ├── simple-rag/
+│   ├── agentic-rag/
+│   ├── graph-rag/
+│   ├── crag/
+│   ├── multi-agent/
+│   └── voice-assistant/
+│
+├── backend/
+│   ├── api/
+│   ├── services/
+│   ├── agents/
+│   └── workflows/
+│
+├── frontend/
+│   └── react-ui/
+│
+├── vector-db/
+│
+├── documents/
+│
+├── tests/
+│
+└── requirements.txt
 ```
 
-## Run a RAG example
+---
 
-```bash
-py RAG\pdf_RAG.py
+# Core Concepts
+
+# Large Language Models (LLMs)
+
+LLMs generate responses by predicting the next token.
+
+Examples:
+
+* GPT-4o
+* GPT-5
+* Claude
+* Gemini
+* Llama
+* Qwen
+
+Responsibilities:
+
+* Text Generation
+* Summarization
+* Classification
+* Reasoning
+
+---
+
+# Prompt Engineering
+
+Framework:
+
+## RTCCO
+
+Role
+
+Task
+
+Context
+
+Constraints
+
+Output
+
+Example:
+
+```text
+You are a senior HR assistant.
+
+Task:
+Answer employee leave questions.
+
+Context:
+Use company policy.
+
+Constraints:
+Do not make assumptions.
+
+Output:
+Provide concise responses.
 ```
 
-Then open the local Streamlit URL shown in the terminal.
+---
 
-## Notes
+# Retrieval-Augmented Generation (RAG)
 
-- The project uses `ollama`, `openai`, and `google-generativeai` libraries for different LLM backends.
-- The RAG example uses `langchain`, `chromadb`, and `unstructured` for document loading and vector search.
-- Make sure your API keys and local LLM endpoints are configured before running the scripts.
+RAG combines retrieval and generation.
+
+## Flow
+
+```text
+User Query
+      ↓
+Embedding
+      ↓
+Vector Search
+      ↓
+Relevant Chunks
+      ↓
+LLM
+      ↓
+Answer
+```
+
+## Components
+
+1. Document Loader
+2. Chunking
+3. Embeddings
+4. Vector Database
+5. Retriever
+6. LLM
+
+---
+
+# Model Context Protocol (MCP)
+
+MCP enables AI to interact with tools.
+
+## Flow
+
+```text
+User Request
+      ↓
+LLM
+      ↓
+Tool Selection
+      ↓
+API Call
+      ↓
+Response
+```
+
+Examples:
+
+* Leave Application
+* Ticket Creation
+* CRM Updates
+* Database Queries
+
+---
+
+# Agentic AI
+
+Agent = LLM + Memory + Tools + Reasoning
+
+## Agent Lifecycle
+
+```text
+Think
+  ↓
+Decide
+  ↓
+Act
+  ↓
+Observe
+```
+
+Capabilities:
+
+* Planning
+* Decision Making
+* Tool Usage
+* Memory
+
+---
+
+# Multi-Agent Systems
+
+Multiple agents collaborate together.
+
+Example:
+
+```text
+Manager Agent
+       ↓
+Research Agent
+       ↓
+Search Tool
+
+Manager Agent
+       ↓
+HR Agent
+       ↓
+Payroll Tool
+```
+
+Frameworks:
+
+* LangGraph
+* CrewAI
+* AutoGen
+* OpenAI Agents SDK
+
+---
+
+# Vector Databases
+
+Store embeddings for semantic search.
+
+Popular Options:
+
+* ChromaDB
+* Pinecone
+* Weaviate
+* Supabase Vector
+* FAISS
+
+---
+
+# Workflow Orchestration
+
+Coordinates multiple workflows.
+
+## Example
+
+```text
+Customer Message
+      ↓
+Sentiment Analysis
+      ↓
+Priority Detection
+      ↓
+Knowledge Search
+      ↓
+AI Response
+      ↓
+CRM Update
+```
+
+Tools:
+
+* LangGraph
+* n8n
+* Airflow
+* Temporal
+
+---
+
+# Running Projects
+
+## Simple RAG
+
+### Start Ollama
+
+```bash
+ollama run llama3
+```
+
+### Run Application
+
+```bash
+python app.py
+```
+
+---
+
+## Streamlit Application
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## FastAPI Application
+
+```bash
+uvicorn app:app --reload
+```
+
+---
+
+## React Frontend
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+# Environment Variables
+
+Create a .env file
+
+```env
+OPENAI_API_KEY=your_key
+ANTHROPIC_API_KEY=your_key
+GOOGLE_API_KEY=your_key
+
+MODEL_NAME=gpt-4o
+
+VECTOR_DB=chroma
+```
+
+Load:
+
+```python
+from dotenv import load_dotenv
+
+load_dotenv()
+```
+
+---
+
+# Technology Stack
+
+Frontend
+
+* React
+* Vite
+* Tailwind CSS
+
+Backend
+
+* Python
+* FastAPI
+
+AI Frameworks
+
+* LangChain
+* LangGraph
+* CrewAI
+
+LLMs
+
+* OpenAI
+* Claude
+* Gemini
+* Ollama
+
+Vector Databases
+
+* ChromaDB
+* Pinecone
+* FAISS
+
+Deployment
+
+* Vercel
+* Render
+* Docker
+
+---
+
+# Troubleshooting
+
+## Ollama Not Found
+
+```bash
+ollama --version
+```
+
+Verify installation.
+
+---
+
+## Tesseract Error
+
+Install:
+
+```bash
+tesseract --version
+```
+
+Add to PATH.
+
+---
+
+## FFmpeg Error
+
+Install FFmpeg:
+
+```bash
+ffmpeg -version
+```
+
+Add ffmpeg/bin to PATH.
+
+---
+
+## OpenAI API Error
+
+Verify:
+
+```bash
+echo %OPENAI_API_KEY%
+```
+
+or
+
+```bash
+printenv OPENAI_API_KEY
+```
+
+---
+
+# Learning Roadmap
+
+1. Python
+2. APIs
+3. Prompt Engineering
+4. RAG
+5. Vector Databases
+6. LangChain
+7. LangGraph
+8. CrewAI
+9. MCP
+10. Agentic AI
+11. Multi-Agent Systems
+12. Enterprise AI Applications
+
+---
+
+⭐ This repository serves as a hands-on learning and implementation hub for Generative AI and Agentic AI projects.
