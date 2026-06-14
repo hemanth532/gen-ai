@@ -1,0 +1,457 @@
+Gen AI & Agentic AI
+Day1: 3/21/26
+March Recordings - Google Drive
+Ollama – we can download models 
+ChatGPT - GenAI Mastery Coach
+Note: Asking about use cases or projects in STAR format (situation, task, Action, result) ?
+Agentic AI Engineer
+Prompt Engineer
+Application Developer
+Gen AI Engineer
+Tokenizer - OpenAI API
+Meal Planner:
+ChatGPT - NutriPro -Ghar Ka Khana
+Resume Builder:
+https://chatgpt.com/g/g-69bd4fb5b90881918954fd69d61dc0d5-resume-architect
+
+Day2:
+LLM
+L – Large- Trained in massive data
+L – Language – Works on Text
+M – Model- Mathematical System
+Choose LLM model based on parameters (3B, 2B, 1B)
+
+Tokens – what we send to and get from LLM are the tokens and it costs 
+Context –
+
+
+
+Gen AI Architecture
+
+
+Day3: 
+Prompt Engineering: (RTC CO)
+R - Role
+T - Task
+C - Context
+C – Constraints 
+O – Output 
+Prompt Analyzer:
+ChatGPT - Prompt Engineering Coach
+
+Day4:
+Types of Prompts:
+Role based prompting 
+Prompt Chaining 
+Zero chat prompting – No examples (Generic things) (Just asking question) 
+Single chat prompting – one example
+Multi chat prompting – two or more examples
+
+Day5:
+ChatGPT - Data Analyst Pro
+Create an own GPT with persona like sale details, resume builder, learning gen AI etc. 
+System Prompt:
+Persona – Never talk anything beyond data analytics 
+Persona = Constraints = guardrails (putting condition)
+We can get the Tone
+guardrail is a rule, control, or safety mechanism that keeps a system, process, or behavior within safe or acceptable limits. Think of it like the rails on the side of a highway 🛣️—they don’t stop you from driving, but they prevent you from going off the road.
+
+
+Example: Creating custom GPTs is very useful for kids, as it helps them concentrate on the assigned subject without getting distracted or deviating from it.
+
+Day6:
+RAG - Retrieval-Augmented Generation - Fetch knowledge from documents
+MCP - Model Context Protocol - Take action using tools
+
+
+
+Example:
+https://notebooklm.google.com/
+
+“Based on our HR policy, apply leave for tomorrow”
+RAG → finds leave policy 
+MCP → submits leave request in HR system
+
+RAG Flow
+Query → Vector DB → Context → LLM → Answer
+MCP Flow
+Query → LLM → Tool Selection → API Call → Result
+
+When to use what
+Use RAG when:
+You have documents / knowledge base 
+Data changes frequently 
+Need accurate, grounded answers 
+Use MCP when:
+You need real actions 
+Integrate with tools / APIs 
+Build AI agents
+
+Final takeaway
+RAG answers “What do we know?” 
+MCP answers “What can we do?” 
+Together → complete AI system
+
+
+
+
+
+Day7: Find and run models 
+Ollama
+Hugging Face – The AI community building the future.
+Ollama is a tool that lets you run large language models (LLMs) locally on your machine—no cloud required.
+Ollama – cli – platform to run models – orchestrations  
+commands:
+ollama run “model name”
+ollama ls
+ollama ps
+ollama help
+
+🧩 Architecture (simple)
+Your App → Ollama → Local Model → Response
+
+🔐 Why people use Ollama
+✅ Privacy
+Data stays on your machine 
+No API calls to cloud 
+✅ Offline capability
+Works without internet 
+✅ Cost savings
+No per-token charges
+
+
+
+Day8:
+Create a model: we can create a new instance of model with base model
+Base model -> system instructions -> personnel model -> interacting
+ollama create “custom model name”
+LLM’s understand .md (mark downs) files easily. 
+cmd: 
+ollama create KalamCoach -f “c:\users\hema\downloads\ KalamCoach.md”
+
+KalamCoach.md
+FROM llama3.2:1B
+SYSTEM """
+You are Dr. APJ Abdul Kalam — the People’s President.
+You speak with warmth, wisdom, vision, and deep encouragement.
+
+Your tone:
+- Inspirational
+- Simple and powerful
+- Forward-looking
+- Scientific, yet human
+
+You help people believe in their potential.
+You turn complex ideas into simple, beautiful explanations.
+You are an expert in Science and Physics.
+always reply in 3-4 sentences max. 
+"""
+
+KoachKohli.md
+FROM qwen3.5:0.8b
+SYSTEM """
+You are Virat Kohli.
+You speak with intensity, confidence, discipline, and a champion's mindset.
+You motivate people like a high-performance coach.
+Your tone: energetic, passionate, bold.
+"""
+Day9:
+Refresh session about promoting 
+
+Day10:
+RAG - Retrieval-Augmented Generation - Fetch knowledge from documents or knowledge base
+Documents – chunking – embeddings – vector database
+Chunking – breaking the large set of documents into smaller pieces
+Embeddings – converting data into number’s - machine can understand
+Vector search – searching nearest/closest vectors (semantic search) - Intension based search 
+Example of Vector Db’s: Pinecone
+
+Day11: Python basics 
+Variable 
+Function’s
+Condition’s 
+Loop 
+
+Day12: 
+Read and write file 
+Call LLM
+1. First, create a virtual environment (if not already)
+python -m venv venv
+2. Activate the environment
+venv\Scripts\activate
+3. Deactivate 
+deactivate
+https://platform.openai.com/settings/organization/api-keys
+
+Day13: 
+MCP?
+Context engineering?
+
+Day14: 
+Multi model usage – Need to identify which model is good for what and end of the day accuracy is important 
+Extract data from PDF model 
+Use OCR model for images
+Compare/validate results – thinking model 
+Speech to text, text to speech 
+Example: PO (purchase order) Generated -> product/service delivered ->PO (PDF), invoice (pdf, jpeg), payment details (digital, check) OCR -> (Yes) generate report – send to finance team -> (No – PO and invoice is not matched) flag for review -> End   
+
+
+
+Day15:
+RAG - Retrieval-Augmented Generation - Fetch knowledge from documents or knowledge base
+Documents – chunking – embeddings – vector database
+Chunking – breaking the large set of documents into smaller pieces
+Embeddings – converting data into number’s - machine can understand
+Vector search – searching nearest/closest vectors (semantic search) - Intension based search 
+Example of Vector Db’s: Pinecone, chroma db
+ 
+Variants
+Simple RAG 
+Agentic RAG 
+Graph RAG 
+Corrective RAG
+
+RAG: steps 
+Start local LLM
+PDF Reader 
+PDF chunking 
+Embeddings 
+Vector DB
+LLM for processing the extracted data 
+Conversation loop
+Try: .pdf, .txt, .md, .doc 
+
+Day16:
+Multi RAG: .pdf, .txt, .md, .doc and etc
+
+Day17:
+Multi RAG UI
+
+
+
+Vercel (React UI)
+        ↓
+Render (FastAPI MCP + RAG)
+        ↓
+Supabase (DB + Auth + Vector)
+Open Source:
+Stitch - Projects – UI designer 
+Google AI Studio – convert to UI code 
+
+Day18:
+Vibe Coding 
+Local RAG App Implementation
+
+Day19:
+Short term memory techniques (context window)
+Summary
+Truncation 
+Sliding window
+Long term memory 
+
+Day20:
+Langchain – chain of thoughts: A -> B-> C
+chatbots, RAG systems, and AI agents.
+langgraph – multi-step, looping, and agent-style workflows
+langsmith - building, debugging, and monitoring applications
+
+
+Additional Session : AI Resume Masterclass
+Summary:
+Role – AI Engineer 
+Skills – RAG, Python, Lang chain
+Specialization – workflow automation 
+Business value - what problems solved 
+We should not miss:
+Name
+Phone Number
+Email Id
+Linked in
+GitHub
+City + State
+Resume Sections:
+Header 
+Summary 
+Skills 
+Experience 
+Projects 
+Education 
+Certifications 
+1 - 2 pages max
+Sampel Project:
+Multi Agent AI system
+Voice AI Assistants 
+AI workflow orchestration 
+ATS (Application Tracking System):
+
+Day21:
+Keyword search (dealing with facts) vs semantic search (intent, context, meaning)
+
+
+🧠 What semantic search actually does
+Understands the contextual meaning of words instead of literal matches.
+Interprets user intent (e.g., informational vs. transactional queries).
+Uses vector embeddings to represent text as numerical vectors so it can compare meaning, not just words. 
+Leverages knowledge graphs (like Google’s Knowledge Graph) to understand entities and relationships. 
+Considers context clues such as location, previous searches, and phrasing
+
+Transformer is an AI model that looks at all words at the same time and uses self-attention to figure out which words matter most to each other.
+
+🧩 Why Transformers were invented
+Before transformers, models like RNNs read text one word at a time, which caused problems:
+They forget earlier words in long sentences
+They are slow because they process sequentially
+They struggle with long-range relationships 
+Transformers fix all of this by processing the entire sentence at once.
+
+Day22:
+Semantic and keyword search live coding session 
+Graph RAG uses Depth-First Search (DFS) and Breadth-First Search (BFS)
+
+
+
+Day23:
+Constraints 
+Guardrails & content filters 
+Governance (compliance) & Auditing (Regulatory adherence)
+Evaluation & testing – AI system quality assurance
+
+Day24: (Multi model system)
+Speech to text and text to speech 
+https://openai.com/index/whisper/
+openai-whisper
+Image – OCR (optical character recognition) - Text 
+Pytesseract
+dall·e - image generation
+we may face Issues while using whisper:
+	1.Download the files from :ffmpeg-git-full.7z
+https://www.gyan.dev/ffmpeg/builds/
+2.In the download check for ffmpeg.exe
+3.Extract and place under C/ffmpeg
+4. Set Environment Variable (C:\ffmpeg\bin)
+5.Restart vs code
+6.ffmpeg -version 
+"py -m streamlit run .\Multimodal.py"
+
+Day25: (Workflow)
+Workflow orchestration? 
+Orchestration – someone should instruct which task be performed 
+In an AI workflow, orchestration is the automated coordination and management of the entire end-to-end process of building, deploying, and maintaining AI models.
+An AI pipeline is complex, involving many different tools, data sources, and computing environments. Orchestration acts as the "glue" that connects these disconnected steps into a single, automated, and repeatable loop.
+
+Lang chain: it does Orchestration
+
+Day26: (Agentic AI) 
+https://n8n.io/workflows/
+similar to n8n:
+https://zapier.com/
+https://ai.azure.com/home
+https://aws.amazon.com/bedrock/
+
+n8n Local setup
+>npm install n8n -g
+> n8n
+http://localhost:5678/
+n8n: steps
+Trigger node -> Actions -> Logic -> output node
+Start node -> workers -> output node
+
+Day27:
+Orchestration
+    └── Workflow
+            └── Pipeline
+
+
+Example in an AI application:
+Pipeline: Retrieve documents → Rank results → Generate answer 
+Workflow: Handle user query, approval checks, retries, notifications 
+Orchestration: Coordinate multiple agents, workflows, databases, APIs, and monitoring across the entire platform 
+A simple rule of thumb:
+Pipeline = sequence of transformations 
+Workflow = sequence of tasks with business logic 
+Orchestration = coordination of workflows and systems
+
+Assignments: implement a customer support pipeline
+Customer sends a message -> Sentiment analysis -> Priority detection -> Knowledge Graph/docs -> AI Response generation -> response delivered to the USER -> CRM Updated
+On Fail Over: retry or fallbacks (backup system, or alternative path) or Error handling 
+Use Cases: HR, IT, Finance, Support, Sales
+
+
+
+Day28:
+Job Search for automation:
+https://www.lever.co/
+https://www.greenhouse.com/careers
+
+Authorization -> Validation -> Moderation -> AI -> Logs -> analytics -> response 
+Day29:
+Security (PII data)
+Prompt Injection Risk
+Solution: before sending PII data to LLM we should mask and needs to be identified patterns (account number, SSN, credit card number etc)
+
+Day30: (Implement Enterprise System)
+
+Day31: (Agentic AI workflow frameworks)
+Agent: System can think, redecide and act -> LLM + Memory + Tools + 
+Agent = Reasoning + Planning + Tool Usage + Memory
+Think – LLM
+Decide – decision loop
+Act – actions (tools) 
+
+
+
+
+Eg: 
+Manager Agent
+↓
+Research Agent
+↓
+Web Search Tool
+
+HR Assistant Agent
+├── Policy Search Tool
+├── Leave Balance Tool
+├── Payroll Tool
+└── Employee Directory Tool
+
+Agentic AI frameworks (Multi Agents)
+Lang graph (controlled flow, flow is defined, sequential flow, one input is output of next flow) 
+Eg:  Agentic RAG, Human in the loop, Enterprise systems 
+
+Crew AI (flow is not defined) (Multiple AI agents working like a team, coordinating themselves, multi agent orchestration)
+Eg: Role based collaboration 
+Auto gen (flow is uncertain) (Research and experimentation) (AI Agents are talking to each other) – it will run till we get refined output 
+Eg: Multi agent debate, Vibe coding 
+
+Lang chain (Conversational AI)
+Lang graph (Agentic AI)
+Lang smith
+Lang fuse 
+google adk?
+
+
+
+Agentic Patterns?
+
+
+Day32: 
+Working session of Lang Graph, Crew AI, Auto gen
+
+Day33: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
